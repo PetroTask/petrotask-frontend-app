@@ -1,0 +1,25 @@
+{
+  "activity-management": {
+    "title": "Gestión de Actividades",
+    "add": "Agregar Actividad",
+    "edit": "Editar Actividad",
+    "delete": "Eliminar Actividad",
+    "status": "Estado",
+    "priority": "Prioridad",
+    "assigned": "Asignado a"
+  },
+  "task-planning": {
+    "title": "Planificación de Tareas",
+    "create": "Crear Tarea",
+    "schedule": "Programar",
+    "reschedule": "Reprogramar",
+    "complete": "Completar",
+    "cancel": "Cancelar"
+  },
+  "activity-card": {
+    "start": "Inicio",
+    "end": "Fin",
+    "duration": "Duración",
+    "progress": "Progreso"
+  }
+} 

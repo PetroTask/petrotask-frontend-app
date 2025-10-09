@@ -1,0 +1,104 @@
+{
+  "LOCATION_MANAGEMENT": {
+    "TITLE": "Location Management",
+    "SUBTITLE": "Manage zones and locations for efficient resource organization",
+    "ADD_ZONE": "Add Zone",
+    "ADD_LOCATION": "Add Location",
+    "SEARCH_PLACEHOLDER": "Search zones and locations...",
+    "EMPTY_STATE": {
+      "TITLE": "No zones available",
+      "DESCRIPTION": "Start by creating zones to organize your locations",
+      "ACTION": "Create First Zone"
+    },
+    "ZONE": {
+      "NAME": "Zone Name",
+      "LOCATIONS_COUNT": "locations",
+      "ACTIVE_LOCATIONS": "active",
+      "ACTIONS": {
+        "ADD_LOCATION": "Add Location",
+        "EDIT": "Edit Zone",
+        "DELETE": "Delete Zone"
+      }
+    },
+    "LOCATION": {
+      "ADDRESS": "Address",
+      "CITY": "City",
+      "COUNTRY": "Country",
+      "STATUS": "Status",
+      "COORDINATES": "Coordinates",
+      "ACTIONS": {
+        "EDIT": "Edit Location",
+        "TOGGLE_STATUS": "Toggle Status",
+        "VIEW_DETAILS": "View Details"
+      }
+    },
+    "FILTERS": {
+      "ALL_STATUS": "All Status",
+      "ACTIVE_ONLY": "Active Only",
+      "INACTIVE_ONLY": "Inactive Only"
+    }
+  },
+  "EQUIPMENT_MANAGEMENT": {
+    "TITLE": "Equipment Management",
+    "SUBTITLE": "Monitor and manage your equipment fleet efficiently",
+    "ADD_EQUIPMENT": "Add Equipment",
+    "SEARCH_PLACEHOLDER": "Search equipment by name, model or serial...",
+    "FILTERS": {
+      "ALL_TYPES": "All Types",
+      "ALL_STATUS": "All Status"
+    },
+    "TABLE": {
+      "NAME": "Name",
+      "TYPE": "Type",
+      "MODEL": "Model",
+      "SERIAL": "Serial Number",
+      "STATUS": "Status",
+      "CAPACITY": "Capacity",
+      "LOCATION": "Location",
+      "ACTIONS": "Actions"
+    },
+    "CARD": {
+      "SERIAL": "Serial",
+      "CAPACITY": "Capacity",
+      "LOCATION": "Location"
+    },
+    "STATUS": {
+      "AVAILABLE": "Available",
+      "IN_USE": "In Use",
+      "MAINTENANCE": "Maintenance",
+      "OUT_OF_SERVICE": "Out of Service"
+    },
+    "EMPTY_STATE": {
+      "TITLE": "No equipment found",
+      "DESCRIPTION": "No equipment matches your current search and filter criteria",
+      "ACTION": "Clear Filters"
+    }
+  },
+  "POSITION_MANAGEMENT": {
+    "TITLE": "Position Management",
+    "SUBTITLE": "Manage work positions available in your organization",
+    "ADD_POSITION": "Add Position",
+    "EDIT_POSITION": "Edit Position",
+    "ADD_FIRST_POSITION": "Add First Position",
+    "SEARCH_PLACEHOLDER": "Search positions by name or description...",
+    "NO_POSITIONS": "No positions available",
+    "NO_POSITIONS_DESCRIPTION": "Start by adding work positions to organize your organizational structure",
+    "TABLE": {
+      "ICON": "Icon",
+      "NAME": "Name",
+      "DESCRIPTION": "Description",
+      "ACTIONS": "Actions"
+    },
+    "FORM": {
+      "TITLE": "Position Title",
+      "TITLE_PLACEHOLDER": "E.g: Operations Manager",
+      "TITLE_REQUIRED": "Position title is required",
+      "TITLE_MIN_LENGTH": "Title must be at least 2 characters long",
+      "DESCRIPTION": "Position Description",
+      "DESCRIPTION_PLACEHOLDER": "Describe main responsibilities and functions...",
+      "DESCRIPTION_REQUIRED": "Description is required",
+      "DESCRIPTION_MIN_LENGTH": "Description must be at least 5 characters long",
+      "HELPER_TEXT": "Clearly define the title and responsibilities for better team organization"
+    }
+  }
+} 

@@ -1,0 +1,114 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Agregar",
+    "update": "Actualizar",
+    "create": "Crear",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "validation": {
+    "required": "Este campo es requerido",
+    "email": "Formato de email inválido",
+    "minLength": "Mínimo {{min}} caracteres",
+    "maxLength": "Máximo {{max}} caracteres"
+  },
+  "form": {
+    "actions": {
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "submit": "Enviar",
+      "create": "Crear",
+      "update": "Actualizar"
+    },
+    "errors": {
+      "required": "Este campo es requerido",
+      "email": "Formato de email inválido",
+      "minLength": "Mínimo {{length}} caracteres",
+      "maxLength": "Máximo {{length}} caracteres",
+      "min": "Valor mínimo: {{min}}",
+      "max": "Valor máximo: {{max}}",
+      "pattern": "Formato inválido"
+    },
+    "fields": {
+      "username": "Nombre de usuario",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "roles": "Roles",
+      "status": "Estado"
+    },
+    "placeholders": {
+      "select": "Seleccionar...",
+      "enter": "Ingrese...",
+      "choose": "Elegir..."
+    }
+  },
+  "SHARED": {
+    "ACTIONS": "Acciones",
+    "ADD": "Agregar",
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "CANCEL": "Cancelar",
+    "SAVE": "Guardar",
+    "CREATE": "Crear",
+    "UPDATE": "Actualizar",
+    "SEARCH": "Buscar",
+    "FILTER": "Filtrar",
+    "REFRESH": "Actualizar",
+    "LOADING": "Cargando...",
+    "NO_DATA": "No hay datos disponibles",
+    "CONFIRM": "Confirmar",
+    "SUCCESS": "Éxito",
+    "ERROR": "Error",
+    "WARNING": "Advertencia",
+    "INFO": "Información",
+    "CLOSE": "Cerrar",
+    "STATUS": {
+      "ACTIVE": "Activo",
+      "INACTIVE": "Inactivo",
+      "PENDING": "Pendiente",
+      "COMPLETED": "Completado",
+      "CANCELLED": "Cancelado"
+    },
+    "TABLE_VIEW": "Vista de Tabla",
+    "CARD_VIEW": "Vista de Tarjetas"
+  },
+  "NAVIGATION": {
+    "DASHBOARD": "Panel de Control",
+    "RESOURCES": "Recursos",
+    "PLANNING": "Planificación",
+    "EXECUTION": "Ejecución",
+    "IAM": "Gestión de Identidad",
+    "NOTIFICATIONS": "Notificaciones",
+    "BILLING": "Facturación",
+    "SETTINGS": "Configuración",
+    "LOGOUT": "Cerrar Sesión"
+  },
+  "POSITION_MANAGEMENT": {
+    "TITLE": "Gestión de Posiciones",
+    "SUBTITLE": "Administra las posiciones de trabajo disponibles en tu organización",
+    "ADD_POSITION": "Agregar Posición",
+    "ADD_FIRST_POSITION": "Agregar Primera Posición",
+    "SEARCH_PLACEHOLDER": "Buscar posiciones por nombre o descripción...",
+    "NO_POSITIONS": "No hay posiciones disponibles",
+    "NO_POSITIONS_DESCRIPTION": "Comienza agregando posiciones de trabajo para organizar tu estructura organizacional",
+    "TABLE": {
+      "ICON": "Icono",
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "ACTIONS": "Acciones"
+    }
+  }
+} 

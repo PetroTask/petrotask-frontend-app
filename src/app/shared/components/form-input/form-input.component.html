@@ -1,0 +1,28 @@
+<div [class]="getCssClasses()">
+  <label *ngIf="label" class="form-input__label">
+    {{ label }}
+    <span *ngIf="required" class="form-input__required">*</span>
+  </label>
+  
+  <div class="form-input__field">
+    <input
+      [type]="type"
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      class="form-input__input"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+    />
+  </div>
+
+  <div *ngIf="hasError && errorMessage" class="form-input__error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="helpText && !hasError" class="form-input__help">
+    {{ helpText }}
+  </div>
+</div>

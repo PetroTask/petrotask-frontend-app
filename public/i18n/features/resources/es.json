@@ -1,0 +1,104 @@
+{
+  "LOCATION_MANAGEMENT": {
+    "TITLE": "Gestión de Ubicaciones",
+    "SUBTITLE": "Administra zonas y ubicaciones para una organización eficiente de recursos",
+    "ADD_ZONE": "Agregar Zona",
+    "ADD_LOCATION": "Agregar Ubicación",
+    "SEARCH_PLACEHOLDER": "Buscar zonas y ubicaciones...",
+    "EMPTY_STATE": {
+      "TITLE": "No hay zonas disponibles",
+      "DESCRIPTION": "Comienza creando zonas para organizar tus ubicaciones",
+      "ACTION": "Crear Primera Zona"
+    },
+    "ZONE": {
+      "NAME": "Nombre de Zona",
+      "LOCATIONS_COUNT": "ubicaciones",
+      "ACTIVE_LOCATIONS": "activas",
+      "ACTIONS": {
+        "ADD_LOCATION": "Agregar Ubicación",
+        "EDIT": "Editar Zona",
+        "DELETE": "Eliminar Zona"
+      }
+    },
+    "LOCATION": {
+      "ADDRESS": "Dirección",
+      "CITY": "Ciudad",
+      "COUNTRY": "País",
+      "STATUS": "Estado",
+      "COORDINATES": "Coordenadas",
+      "ACTIONS": {
+        "EDIT": "Editar Ubicación",
+        "TOGGLE_STATUS": "Cambiar Estado",
+        "VIEW_DETAILS": "Ver Detalles"
+      }
+    },
+    "FILTERS": {
+      "ALL_STATUS": "Todos los Estados",
+      "ACTIVE_ONLY": "Solo Activos",
+      "INACTIVE_ONLY": "Solo Inactivos"
+    }
+  },
+  "EQUIPMENT_MANAGEMENT": {
+    "TITLE": "Gestión de Equipos",
+    "SUBTITLE": "Monitorea y administra tu flota de equipos de manera eficiente",
+    "ADD_EQUIPMENT": "Agregar Equipo",
+    "SEARCH_PLACEHOLDER": "Buscar equipos por nombre, modelo o serie...",
+    "FILTERS": {
+      "ALL_TYPES": "Todos los Tipos",
+      "ALL_STATUS": "Todos los Estados"
+    },
+    "TABLE": {
+      "NAME": "Nombre",
+      "TYPE": "Tipo",
+      "MODEL": "Modelo",
+      "SERIAL": "Número de Serie",
+      "STATUS": "Estado",
+      "CAPACITY": "Capacidad",
+      "LOCATION": "Ubicación",
+      "ACTIONS": "Acciones"
+    },
+    "CARD": {
+      "SERIAL": "Serie",
+      "CAPACITY": "Capacidad",
+      "LOCATION": "Ubicación"
+    },
+    "STATUS": {
+      "AVAILABLE": "Disponible",
+      "IN_USE": "En Uso",
+      "MAINTENANCE": "Mantenimiento",
+      "OUT_OF_SERVICE": "Fuera de Servicio"
+    },
+    "EMPTY_STATE": {
+      "TITLE": "No se encontraron equipos",
+      "DESCRIPTION": "Ningún equipo coincide con tus criterios de búsqueda y filtros actuales",
+      "ACTION": "Limpiar Filtros"
+    }
+  },
+  "POSITION_MANAGEMENT": {
+    "TITLE": "Gestión de Posiciones",
+    "SUBTITLE": "Administra las posiciones de trabajo disponibles en tu organización",
+    "ADD_POSITION": "Agregar Posición",
+    "EDIT_POSITION": "Editar Posición",
+    "ADD_FIRST_POSITION": "Agregar Primera Posición",
+    "SEARCH_PLACEHOLDER": "Buscar posiciones por nombre o descripción...",
+    "NO_POSITIONS": "No hay posiciones disponibles",
+    "NO_POSITIONS_DESCRIPTION": "Comienza agregando posiciones de trabajo para organizar tu estructura organizacional",
+    "TABLE": {
+      "ICON": "Icono",
+      "NAME": "Nombre",
+      "DESCRIPTION": "Descripción",
+      "ACTIONS": "Acciones"
+    },
+    "FORM": {
+      "TITLE": "Nombre de la Posición",
+      "TITLE_PLACEHOLDER": "Ej: Gerente de Operaciones",
+      "TITLE_REQUIRED": "El nombre de la posición es requerido",
+      "TITLE_MIN_LENGTH": "El nombre debe tener al menos 2 caracteres",
+      "DESCRIPTION": "Descripción de la Posición",
+      "DESCRIPTION_PLACEHOLDER": "Describe las responsabilidades y funciones principales...",
+      "DESCRIPTION_REQUIRED": "La descripción es requerida",
+      "DESCRIPTION_MIN_LENGTH": "La descripción debe tener al menos 5 caracteres",
+      "HELPER_TEXT": "Define claramente el título y las responsabilidades para una mejor organización del equipo"
+    }
+  }
+} 

@@ -1,0 +1,203 @@
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
+import { AuthenticationService } from '../../services/authentication.service';
+import { SignUpRequest } from '../../models/sign-up.request';
+
+@Component({
+  selector: 'app-register',
+  standalone: true,
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
+  imports: [FormsModule, TranslatePipe]
+})
+export class RegisterComponent {
+  // Datos de la empresa
+  ruc: string = '';
+  legalName: string = '';
+  commercialName: string = '';
+  address: string = '';
+  city: string = '';
+  country: string = '';
+  tenantPhone: string = '';
+  tenantEmail: string = '';
+  website: string = '';
+  
+  // Datos del usuario
+  username: string = '';
+  password: string = '';
+  repeatPassword: string = '';
+  email: string = '';
+  firstName: string = '';
+  lastName: string = '';
+  
+  errorMessage: string = '';
+  isLoading: boolean = false;
+  submitted: boolean = false;
+  
+  // Sistema de pestañas mejorado
+  currentTab: number = 0;
+  tabs = [
+    { id: 0, title: 'register-container.company-basic', icon: '🏢', completed: false },
+    { id: 1, title: 'register-container.company-contact', icon: '📞', completed: false },
+    { id: 2, title: 'register-container.user-basic', icon: '👤', completed: false },
+    { id: 3, title: 'register-container.user-credentials', icon: '🔐', completed: false }
+  ];
+
+  private authService = inject(AuthenticationService);
+  private router = inject(Router);
+
+  // Navegación entre pestañas
+  nextTab(): void {
+    if (this.validateCurrentTab()) {
+      this.tabs[this.currentTab].completed = true;
+      if (this.currentTab < this.tabs.length - 1) {
+        this.currentTab++;
+      }
+    }
+  }
+
+  prevTab(): void {
+    if (this.currentTab > 0) {
+      this.currentTab--;
+    }
+  }
+
+  goToTab(tabIndex: number): void {
+    // Solo permitir ir a pestañas completadas o la actual
+    if (tabIndex <= this.currentTab || this.tabs[tabIndex - 1]?.completed) {
+      this.currentTab = tabIndex;
+    }
+  }
+
+  // Validaciones por pestaña
+  validateCurrentTab(): boolean {
+    this.errorMessage = '';
+    
+    if (this.currentTab === 0) {
+      // Validar datos básicos de empresa
+      if (!this.ruc || !this.legalName) {
+        this.errorMessage = 'register-container.fill-required-company-basic';
+        return false;
+      }
+    } else if (this.currentTab === 1) {
+      // Validar datos de contacto de empresa (opcional)
+      return true; // Esta pestaña es opcional
+    } else if (this.currentTab === 2) {
+      // Validar datos básicos de usuario
+      if (!this.firstName || !this.lastName || !this.email) {
+        this.errorMessage = 'register-container.fill-required-user-basic';
+        return false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.email)) {
+        this.errorMessage = 'register-container.email-invalid';
+        return false;
+      }
+    } else if (this.currentTab === 3) {
+      // Validar credenciales de usuario
+      if (!this.username || !this.password || !this.repeatPassword) {
+        this.errorMessage = 'register-container.fill-required-credentials';
+        return false;
+      }
+
+      if (this.password.length < 6) {
+        this.errorMessage = 'register-container.password-min';
+        return false;
+      }
+
+      if (this.password !== this.repeatPassword) {
+        this.errorMessage = 'register-container.password-mismatch';
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
+  // Validación completa para el registro
+  validateAllTabs(): boolean {
+    this.errorMessage = '';
+    
+    // Validar datos básicos de empresa
+    if (!this.ruc || !this.legalName) {
+      this.errorMessage = 'register-container.fill-required-company-basic';
+      return false;
+    }
+
+    // Validar datos básicos de usuario
+    if (!this.firstName || !this.lastName || !this.email) {
+      this.errorMessage = 'register-container.fill-required-user-basic';
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.email)) {
+      this.errorMessage = 'register-container.email-invalid';
+      return false;
+    }
+
+    // Validar credenciales
+    if (!this.username || !this.password || !this.repeatPassword) {
+      this.errorMessage = 'register-container.fill-required-credentials';
+      return false;
+    }
+
+    if (this.password.length < 6) {
+      this.errorMessage = 'register-container.password-min';
+      return false;
+    }
+
+    if (this.password !== this.repeatPassword) {
+      this.errorMessage = 'register-container.password-mismatch';
+      return false;
+    }
+
+    return true;
+  }
+
+  onRegister(): void {
+    this.submitted = true;
+    
+    if (!this.validateAllTabs()) {
+      return;
+    }
+
+    this.isLoading = true;
+    
+    const signUpRequest = new SignUpRequest({
+      ruc: this.ruc,
+      legalName: this.legalName,
+      commercialName: this.commercialName || this.legalName,
+      address: this.address,
+      city: this.city,
+      country: this.country,
+      tenantPhone: this.tenantPhone,
+      tenantEmail: this.tenantEmail || this.email,
+      website: this.website,
+      username: this.username,
+      password: this.password,
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName
+    });
+
+    this.authService.signUp(signUpRequest).subscribe({
+      next: (response) => {
+        this.authService.handleSuccessfulSignUp(response);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.authService.handleAuthError(error, '/register');
+        this.isLoading = false;
+        this.errorMessage = 'register-container.error';
+      }
+    });
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+}
