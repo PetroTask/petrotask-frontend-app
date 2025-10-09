@@ -1,17 +1,7 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://swiftport-api.azurewebsites.net/api/v1',
+  apiBaseUrl: 'http://localhost:8080/api/v1',
   serverBaseUrl: 'http://localhost:3000/api/v1',
   mockBaseUrl: 'https://68237de265ba05803396f293.mockapi.io/api/v1',
-  useFakeApi: false, // Usar API real en producción
-  positionsEndPoint: '/positions',
-  activityEndPoint: '/activity',
-  employeeEndPoint: '/employee',
-  equipmentEndPoint: '/equipment',
-  locationEndPoint: '/location',
-  taskEndPoint: '/task',
-  zoneEndPoint: '/zone',
-  teamMemberEndPoint: '/team-member',
-  team: '/team',
-  taskSchedulingEndPoint: '/task-scheduling',
+  useFakeApi: true, // Usar API real en producción
 };
