@@ -114,11 +114,12 @@ export class FakeApiService {
   signIn(request: SignInRequest): Observable<SignInResponse> {
     return new Observable(observer => {
       this.simulateNetworkDelay().subscribe(() => {
-        const user = this.users.find(u => 
+        const user = this.users.find(u =>
           u.username === request.username && u.password === request.password
         );
 
         if (user) {
+        console.log('User found for login:', user);
         const response: SignInResponse = new SignInResponse({
           id: user.id,
           username: user.username,
@@ -129,6 +130,7 @@ export class FakeApiService {
           token: this.generateFakeToken(user),
           companyId: user.companyId
         });
+        console.log('Login response:', response);
           observer.next(response);
           observer.complete();
         } else {
@@ -142,7 +144,7 @@ export class FakeApiService {
     return new Observable(observer => {
       this.simulateNetworkDelay().subscribe(() => {
         // Verificar si el usuario ya existe
-        const existingUser = this.users.find(u => 
+        const existingUser = this.users.find(u =>
           u.username === request.username || u.email === request.email
         );
 
@@ -168,6 +170,9 @@ export class FakeApiService {
         this.companies.push(newCompany);
 
         // Crear nuevo usuario
+        const userRole = request.role || 'supervisor';
+        const assignedRoles = userRole === 'operario' ? [Roles.FieldOperator] : [Roles.FieldSupervisor];
+
         const newUser = {
           id: this.users.length + 1,
           username: request.username,
@@ -175,8 +180,9 @@ export class FakeApiService {
           email: request.email,
           firstName: request.firstName,
           lastName: request.lastName,
-          roles: [Roles.Admin], // El primer usuario es admin
-          companyId: newCompany.id
+          roles: assignedRoles,
+          companyId: newCompany.id,
+          role: userRole
         };
 
         this.users.push(newUser);
@@ -190,8 +196,9 @@ export class FakeApiService {
           active: true,
           roles: newUser.roles,
           companyId: newCompany.id,
-          message: 'Usuario registrado exitosamente'
-        });
+          message: 'Usuario registrado exitosamente',
+          role: userRole
+        } as any);
 
         observer.next(response);
         observer.complete();
@@ -300,12 +307,12 @@ export class FakeApiService {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         };
-        
+
         if (this.db) {
           this.db.activity = this.db.activity || [];
           this.db.activity.push(newActivity);
         }
-        
+
         observer.next(newActivity);
         observer.complete();
       });
@@ -363,12 +370,12 @@ export class FakeApiService {
           id: Date.now(),
           status: 'ACTIVE'
         };
-        
+
         if (this.db) {
           this.db.employee = this.db.employee || [];
           this.db.employee.push(newEmployee);
         }
-        
+
         observer.next(newEmployee);
         observer.complete();
       });

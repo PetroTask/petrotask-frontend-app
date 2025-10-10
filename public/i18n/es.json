@@ -179,7 +179,15 @@
     "registering": "REGISTRANDO...",
     "already-have-account": "¿Ya tienes una cuenta?",
     "login": "INICIAR SESIÓN",
-    "error": "Error al registrar. Por favor intenta nuevamente."
+    "error": "Error al registrar. Por favor intenta nuevamente.",
+    "role-selection": "Rol",
+    "select-role": "Selecciona tu rol",
+    "role-description": "Elige el rol que mejor se adapte a tu función en la empresa",
+    "supervisor": "Supervisor",
+    "supervisor-description": "Gestiona equipos, supervisa operaciones y toma decisiones estratégicas",
+    "operario": "Operario",
+    "operario-description": "Ejecuta tareas de campo, reporta incidencias y mantiene registros operativos",
+    "role-required": "Por favor selecciona un rol"
   },
   "payment-view": {
     "bank-info": "Ingrese la informacion bancaria",

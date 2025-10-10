@@ -104,6 +104,7 @@ export class AuthenticationService {
     this.localStorageService.setItem('userSession', response);
     this.localStorageService.removeItem('menuItems');
     console.log(`Signed in as ${response.username} with token ${response.token}`);
+    console.log('User roles:', response.roles);
     this.router.navigate(['/petrotask/dashboard']).then();
   }
 
@@ -115,7 +116,24 @@ export class AuthenticationService {
    */
   handleSuccessfulSignUp(response: SignUpResponse): void {
     console.log(`Signed up as ${response.username} with id ${response.id}`);
-    this.router.navigate(['/login']).then();
+    console.log('SignUp response roles:', response.roles);
+
+    // Simular login automático después del registro
+    this.signedIn.next(true);
+    this.signedInUserId.next(response.id);
+    this.signedInUsername.next(response.username);
+    this.roles.next(response.roles as Roles[]);
+    this.localStorageService.setItem('token', this.generateFakeToken(response));
+    this.localStorageService.setItem('userSession', response);
+    this.localStorageService.removeItem('menuItems');
+
+    // Navegar según el rol seleccionado
+    const role = (response as any).role || 'supervisor';
+    if (role === 'operario') {
+      this.router.navigate(['/petrotask/home']).then();
+    } else {
+      this.router.navigate(['/petrotask/dashboard']).then();
+    }
   }
 
   /**
@@ -145,6 +163,10 @@ export class AuthenticationService {
     this.signedInUsername.next('');
     localStorage.removeItem('token');
     this.router.navigate(['/login']).then();
+  }
+
+  private generateFakeToken(user: any): string {
+    return `fake-token-${user.id}-${Date.now()}`;
   }
 
 }

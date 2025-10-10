@@ -23,7 +23,7 @@ export class RegisterComponent {
   tenantPhone: string = '';
   tenantEmail: string = '';
   website: string = '';
-  
+
   // Datos del usuario
   username: string = '';
   password: string = '';
@@ -31,18 +31,20 @@ export class RegisterComponent {
   email: string = '';
   firstName: string = '';
   lastName: string = '';
-  
+  selectedRole: 'supervisor' | 'operario' = 'supervisor';
+
   errorMessage: string = '';
   isLoading: boolean = false;
   submitted: boolean = false;
-  
+
   // Sistema de pestañas mejorado
   currentTab: number = 0;
   tabs = [
     { id: 0, title: 'register-container.company-basic', icon: '🏢', completed: false },
     { id: 1, title: 'register-container.company-contact', icon: '📞', completed: false },
     { id: 2, title: 'register-container.user-basic', icon: '👤', completed: false },
-    { id: 3, title: 'register-container.user-credentials', icon: '🔐', completed: false }
+    { id: 3, title: 'register-container.user-credentials', icon: '🔐', completed: false },
+    { id: 4, title: 'register-container.role-selection', icon: '👥', completed: false }
   ];
 
   private authService = inject(AuthenticationService);
@@ -74,7 +76,7 @@ export class RegisterComponent {
   // Validaciones por pestaña
   validateCurrentTab(): boolean {
     this.errorMessage = '';
-    
+
     if (this.currentTab === 0) {
       // Validar datos básicos de empresa
       if (!this.ruc || !this.legalName) {
@@ -113,14 +115,14 @@ export class RegisterComponent {
         return false;
       }
     }
-    
+
     return true;
   }
 
   // Validación completa para el registro
   validateAllTabs(): boolean {
     this.errorMessage = '';
-    
+
     // Validar datos básicos de empresa
     if (!this.ruc || !this.legalName) {
       this.errorMessage = 'register-container.fill-required-company-basic';
@@ -155,18 +157,31 @@ export class RegisterComponent {
       return false;
     }
 
+    // Validar selección de rol
+    if (!this.selectedRole) {
+      this.errorMessage = 'register-container.role-required';
+      return false;
+    }
+
     return true;
   }
 
   onRegister(): void {
+    console.log('🚀 onRegister() llamado - BOTÓN FUNCIONA!');
+    alert('¡Método onRegister ejecutado!');
+
     this.submitted = true;
-    
+
+    console.log('Validando formulario...');
     if (!this.validateAllTabs()) {
+      console.log('Validación falló:', this.errorMessage);
+      alert('Error de validación: ' + this.errorMessage);
       return;
     }
 
+    console.log('Validación exitosa, iniciando registro...');
     this.isLoading = true;
-    
+
     const signUpRequest = new SignUpRequest({
       ruc: this.ruc,
       legalName: this.legalName,
@@ -181,15 +196,20 @@ export class RegisterComponent {
       password: this.password,
       email: this.email,
       firstName: this.firstName,
-      lastName: this.lastName
+      lastName: this.lastName,
+      role: this.selectedRole
     });
 
     this.authService.signUp(signUpRequest).subscribe({
       next: (response) => {
+        console.log('Registro exitoso:', response);
+        // Pasar el rol seleccionado al método de manejo
+        (response as any).role = this.selectedRole;
         this.authService.handleSuccessfulSignUp(response);
         this.isLoading = false;
       },
       error: (error) => {
+        console.error('Error en registro:', error);
         this.authService.handleAuthError(error, '/register');
         this.isLoading = false;
         this.errorMessage = 'register-container.error';
@@ -199,5 +219,29 @@ export class RegisterComponent {
 
   goToLogin(): void {
     this.router.navigate(['/login']);
+  }
+
+  // Método para debuggear el estado del formulario
+  checkFormState(): void {
+    console.log('Estado del formulario:', {
+      isLoading: this.isLoading,
+      submitted: this.submitted,
+      currentTab: this.currentTab,
+      tabsLength: this.tabs.length,
+      ruc: this.ruc,
+      legalName: this.legalName,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      username: this.username,
+      password: this.password ? '***' : '',
+      repeatPassword: this.repeatPassword ? '***' : ''
+    });
+  }
+
+  // Método de prueba simple
+  testClick(): void {
+    console.log('¡BOTÓN FUNCIONA! Clic detectado');
+    alert('¡El botón funciona!');
   }
 }

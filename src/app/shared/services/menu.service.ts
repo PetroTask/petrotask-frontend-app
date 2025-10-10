@@ -228,34 +228,45 @@ export class MenuService {
   constructor() {}
 
   getMenuItems(): Observable<SidebarMenuItem[]> {
+    console.log('Getting menu items...');
     if(this.localStorageService.hasKey('menuItems')){
       const menuItems : SidebarMenuItem[] = this.localStorageService.getItem('menuItems');
+      console.log('Menu items from localStorage:', menuItems);
       return of(menuItems);
     }
+    console.log('No menu items in localStorage, getting from roles...');
     return this.authService.currentRoles.pipe(
       map(roles => {
+        console.log('Current roles:', roles);
         if (!roles || roles.length === 0) {
+          console.log('No roles found, returning empty menu');
           return [];
         }
         const firstRole = roles[0];
         let menuItems : SidebarMenuItem[] = [];
         switch (firstRole) {
           case Roles.Admin:
+            console.log('Loading admin menu items');
             menuItems = this.adminMenuItems;
             break;
           case Roles.FieldOperator:
+            console.log('Loading operario menu items');
             menuItems =  this.operarioMenuItems;
             break;
           case Roles.FieldSupervisor:
-            menuItems =  this.supervisorMenuItems;
+            console.log('Loading supervisor menu items (same as admin)');
+            menuItems =  this.adminMenuItems; // El supervisor usa el mismo menú que el admin
             break;
           case Roles.FieldPlanner:
+            console.log('Loading planner menu items');
             menuItems =  this.supervisorMenuItems; // Los planificadores usan el mismo menú que supervisores
             break;
           case Roles.FieldTechnician:
+            console.log('Loading technician menu items');
             menuItems =  this.operarioMenuItems; // Los técnicos usan el mismo menú que operarios
             break;
           default:
+            console.log('No matching role found, returning empty menu');
             menuItems = [];
         }
         this.localStorageService.setItem('menuItems', menuItems);
@@ -265,7 +276,7 @@ export class MenuService {
   }
 
   handleRoleError(): void {
-  
+
   }
   getSupervisorMenuItems(): Observable<SidebarMenuItem[]> {
     return of(this.supervisorMenuItems);
