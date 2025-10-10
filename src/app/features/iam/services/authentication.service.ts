@@ -105,7 +105,7 @@ export class AuthenticationService {
     this.localStorageService.removeItem('menuItems');
     console.log(`Signed in as ${response.username} with token ${response.token}`);
     console.log('User roles:', response.roles);
-    this.router.navigate(['/petrotask/dashboard']).then();
+    this.router.navigate(['/petrotask/home']).then();
   }
 
   /**
@@ -129,11 +129,8 @@ export class AuthenticationService {
 
     // Navegar según el rol seleccionado
     const role = (response as any).role || 'supervisor';
-    if (role === 'operario') {
-      this.router.navigate(['/petrotask/home']).then();
-    } else {
-      this.router.navigate(['/petrotask/dashboard']).then();
-    }
+    // Después del registro, llevar siempre al home
+    this.router.navigate(['/petrotask/home']).then();
   }
 
   /**
