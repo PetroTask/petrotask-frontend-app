@@ -23,12 +23,6 @@ export class MenuService {
       route: '/petrotask/home',
     },
     {
-      id: 'dashboard',
-      label: 'Dashboard Operativo',
-      icon: 'dashboard',
-      route: '/petrotask/dashboard'
-    },
-    {
       id: 'task-planning',
       label: 'Planificación de Tareas',
       icon: 'schedule',

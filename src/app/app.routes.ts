@@ -58,7 +58,7 @@ export const routes: Routes = [
     path: 'petrotask',
     component: MainLayoutComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'profile',                      component: ProfileViewComponent},
       { path: 'dashboard',                    component: DashboardComponent},
       { path: 'home',                         component: HomeComponent},

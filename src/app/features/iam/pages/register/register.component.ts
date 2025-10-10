@@ -221,27 +221,5 @@ export class RegisterComponent {
     this.router.navigate(['/login']);
   }
 
-  // Método para debuggear el estado del formulario
-  checkFormState(): void {
-    console.log('Estado del formulario:', {
-      isLoading: this.isLoading,
-      submitted: this.submitted,
-      currentTab: this.currentTab,
-      tabsLength: this.tabs.length,
-      ruc: this.ruc,
-      legalName: this.legalName,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      username: this.username,
-      password: this.password ? '***' : '',
-      repeatPassword: this.repeatPassword ? '***' : ''
-    });
-  }
-
-  // Método de prueba simple
-  testClick(): void {
-    console.log('¡BOTÓN FUNCIONA! Clic detectado');
-    alert('¡El botón funciona!');
-  }
+  // Métodos de debug/prueba eliminados del flujo de registro
 }

@@ -12,7 +12,7 @@
             class="tab-item"
             [class.active]="currentTab === tab.id"
             [class.completed]="tab.completed"
-            [class.disabled]="tab.id > currentTab && !tabs[tab.id - 1]?.completed"
+            [class.disabled]="tab.id > currentTab && !tabs[tab.id - 1].completed"
             (click)="goToTab(tab.id)">
             <span class="tab-icon">{{ tab.icon }}</span>
             <span class="tab-title">{{ tab.title | translate }}</span>
@@ -332,12 +332,6 @@
         }
 
         @if (currentTab === tabs.length - 1) {
-          <button type="button" class="debug-btn" (click)="checkFormState()" style="background: orange; color: white; padding: 5px; margin: 5px;">
-            DEBUG
-          </button>
-          <button type="button" class="test-btn" (click)="testClick()" style="background: blue; color: white; padding: 5px; margin: 5px;">
-            TEST CLICK
-          </button>
           <button type="button" class="register-btn" [disabled]="isLoading" (click)="onRegister()">
             @if (!isLoading) {
               <span>📝 {{ 'register-container.register' | translate }}</span>
