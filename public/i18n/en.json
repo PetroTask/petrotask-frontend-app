@@ -179,7 +179,15 @@
     "registering": "REGISTERING...",
     "already-have-account": "Already have an account?",
     "login": "LOGIN",
-    "error": "Registration error. Please try again."
+    "error": "Registration error. Please try again.",
+    "role-selection": "Role",
+    "select-role": "Select your role",
+    "role-description": "Choose the role that best fits your function in the company",
+    "supervisor": "Supervisor",
+    "supervisor-description": "Manages teams, supervises operations and makes strategic decisions",
+    "operario": "Operator",
+    "operario-description": "Executes field tasks, reports incidents and maintains operational records",
+    "role-required": "Please select a role"
   },
   "payment-view": {
     "bank-info": "Enter your bank information",

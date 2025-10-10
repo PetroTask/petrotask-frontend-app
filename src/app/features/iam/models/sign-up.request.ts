@@ -13,6 +13,7 @@ export class SignUpRequest {
   public email: string;
   public firstName: string;
   public lastName: string;
+  public role?: string;
 
   constructor(data: {
     ruc: string,
@@ -28,7 +29,8 @@ export class SignUpRequest {
     password: string,
     email: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    role?: string
   }) {
     this.ruc = data.ruc;
     this.legalName = data.legalName;
@@ -44,5 +46,6 @@ export class SignUpRequest {
     this.email = data.email;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
+    this.role = data.role;
   }
 }

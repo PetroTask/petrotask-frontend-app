@@ -40,7 +40,7 @@ import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
   styleUrls: ['./styles-demo.component.scss']
 })
 export class StylesDemoComponent {
-  title = 'swiftport-frontend';
+  title = 'petrotask-frontend';
   isDarkTheme = false;
 
   options = [

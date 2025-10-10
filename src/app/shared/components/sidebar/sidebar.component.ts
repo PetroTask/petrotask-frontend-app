@@ -34,11 +34,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(private menuService: MenuService) {}
 
   ngOnInit(): void {
-    console.log('not here');
+    console.log('Sidebar component initialized');
     this.menuService.getMenuItems()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (items) => {
+          console.log('Menu items loaded:', items);
           this.menuItems = items;
         },
         error: (error) => {

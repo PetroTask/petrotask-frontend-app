@@ -16,7 +16,7 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'swiftport-frontend';
+  title = 'petrotask-frontend';
   isDarkTheme = false;
 
   // Use inject() for services
