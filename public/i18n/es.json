@@ -55,6 +55,23 @@
     "maintain": "A mantenimiento",
     "able": "Disponible"
   },
+  "equipment": {
+    "form": {
+      "name": "Nombre",
+      "code": "Código",
+      "plate": "Placa",
+      "capacityLoad": "Capacidad de carga (kg)",
+      "capacityPax": "Capacidad de pasajeros",
+      "status": "Estado",
+      "placeholders": {
+        "name": "Ingrese el nombre del equipo",
+        "code": "Ingrese el código",
+        "plate": "Ingrese la placa",
+        "capacityLoad": "Ingrese la capacidad de carga",
+        "capacityPax": "Ingrese la capacidad de pasajeros"
+      }
+    }
+  },
   "equipment-form-dialog": {
     "plate": "Placa",
     "model": "Modelo/Tipo",
@@ -90,7 +107,11 @@
     "all": "Todos los roles",
     "search": "Buscar por nombre o email",
     "name": "Nombre",
+    "email": "Correo electrónico",
+    "role": "Rol",
     "status": "Estado",
+    "active": "Activo",
+    "inactive": "Inactivo",
     "actions": "Acciones",
     "page": "Página",
     "of": "de",
@@ -552,7 +573,19 @@
     "SUBTITLE": "Administra zonas y ubicaciones para una organización eficiente de recursos",
     "ADD_ZONE": "Agregar Zona",
     "ADD_LOCATION": "Agregar Ubicación",
+    "ADD_FIRST_LOCATION": "Agregar Primera Ubicación",
     "SEARCH_PLACEHOLDER": "Buscar zonas y ubicaciones...",
+    "SEARCH_ZONES_LOCATIONS": "Buscar zonas y ubicaciones...",
+    "FILTER_STATUS": "Filtrar por Estado",
+    "TENANT": "Inquilino",
+    "TOTAL_LOCATIONS": "Total de Ubicaciones",
+    "ACTIVE_LOCATIONS": "Ubicaciones Activas",
+    "NO_ZONES": "No hay zonas disponibles",
+    "NO_ZONES_DESCRIPTION": "Comienza creando zonas para organizar tus ubicaciones",
+    "ADD_FIRST_ZONE": "Agregar Primera Zona",
+    "NO_LOCATIONS_IN_ZONE": "No hay ubicaciones en esta zona",
+    "LOCATIONS_IN_ZONE": "Ubicaciones en la Zona",
+    "LOADING": "Cargando ubicaciones...",
     "EMPTY_STATE": {
       "TITLE": "No hay zonas disponibles",
       "DESCRIPTION": "Comienza creando zonas para organizar tus ubicaciones",
@@ -587,7 +620,13 @@
     }
   },
   "SHARED": {
-    "ACTIONS": "Acciones",
+    "ACTIONS": {
+      "DELETE": "Eliminar",
+      "EDIT": "Editar",
+      "REFRESH": "Actualizar",
+      "ACTIVATE": "Activar",
+      "DEACTIVATE": "Desactivar"
+    },
     "ADD": "Agregar",
     "EDIT": "Editar",
     "DELETE": "Eliminar",
@@ -658,7 +697,13 @@
     "TITLE": "Gestión de Equipos",
     "SUBTITLE": "Monitorea y administra tu flota de equipos de manera eficiente",
     "ADD_EQUIPMENT": "Agregar Equipo",
+    "ADD_FIRST_EQUIPMENT": "Agregar Primer Equipo",
     "SEARCH_PLACEHOLDER": "Buscar equipos por nombre, modelo o serie...",
+    "FILTER_STATUS": "Filtrar por Estado",
+    "TABLE_VIEW": "Vista de Tabla",
+    "CARDS_VIEW": "Vista de Tarjetas",
+    "NO_EQUIPMENT": "No hay equipos disponibles",
+    "NO_EQUIPMENT_DESCRIPTION": "Comienza agregando equipos para gestionar tu flota",
     "FILTERS": {
       "ALL_TYPES": "Todos los Tipos",
       "ALL_STATUS": "Todos los Estados"

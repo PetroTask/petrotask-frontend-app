@@ -1,84 +1,88 @@
-# Sistema de i18n Modular
+# Sistema de i18n Consolidado ✅
 
-Este sistema permite organizar las traducciones por feature para facilitar el mantenimiento.
+Todos los mensajes de traducción están ahora en **2 archivos principales** para facilitar la traducción y el mantenimiento.
 
-## Estructura
+## Estructura Simplificada
 
 ```
 public/i18n/
-├── es.json                    # Archivo principal español
-├── en.json                    # Archivo principal inglés
-├── shared/                    # Traducciones compartidas
-│   ├── es.json
-│   └── en.json
-└── features/                  # Traducciones por feature
-    ├── iam/
-    │   ├── es.json
-    │   └── en.json
-    ├── resources/
-    │   ├── es.json
-    │   └── en.json
-    ├── planning/
-    │   ├── es.json
-    │   └── en.json
-    └── ...
+├── es.json     # ✅ TODAS las traducciones en español
+├── en.json     # ✅ TODAS las traducciones en inglés
+├── shared/     # ⚠️ DEPRECADO - No usar
+└── features/   # ⚠️ DEPRECADO - No usar
 ```
 
-## Cómo funciona
+## ¿Por qué consolidar?
 
-1. **Desarrollo**: Trabajas en los archivos separados por feature
-2. **Build**: Ejecutas `npm run i18n:merge` para combinar todo
-3. **Runtime**: La app usa los archivos principales combinados
+1. **Más fácil de traducir** - Todo en un solo lugar, ideal para enviar a traductores
+2. **Mejor performance** - Solo se carga 1 archivo por idioma (no múltiples)
+3. **Mantenimiento simplificado** - No hay archivos dispersos por features
+4. **Evita duplicados** - Una sola fuente de verdad
+5. **Búsqueda rápida** - Ctrl+F encuentra cualquier mensaje
 
-## Uso
+## Estructura interna de es.json y en.json
 
-### Agregar traducciones a un feature
-
-1. Ve al directorio del feature: `public/i18n/features/[feature-name]/`
-2. Edita los archivos `es.json` y `en.json`
-3. Ejecuta `npm run i18n:merge` para actualizar los archivos principales
-
-### Ejemplo para IAM
+Los mensajes están organizados por módulos:
 
 ```json
-// public/i18n/features/iam/es.json
 {
-  "login-container": {
-    "slogan": "Tu operación en orden, en todo momento",
-    "username": "Nombre de Usuario"
+  "login-container": { ... },
+  "user-management": {
+    "title": "Gestión de Usuarios",
+    "email": "Correo electrónico",
+    "role": "Rol",
+    "active": "Activo"
+  },
+  "LOCATION_MANAGEMENT": {
+    "TITLE": "Gestión de Ubicaciones",
+    "FILTER_STATUS": "Filtrar por Estado",
+    "TOTAL_LOCATIONS": "Total de Ubicaciones"
+  },
+  "EQUIPMENT_MANAGEMENT": {
+    "FILTER_STATUS": "Filtrar por Estado",
+    "TABLE_VIEW": "Vista de Tabla",
+    "NO_EQUIPMENT": "No hay equipos disponibles"
+  },
+  "SHARED": {
+    "ACTIONS": {
+      "DELETE": "Eliminar",
+      "EDIT": "Editar",
+      "REFRESH": "Actualizar",
+      "ACTIVATE": "Activar"
+    }
   }
 }
 ```
 
-### Traducciones compartidas
+## Cómo agregar traducciones
 
-Las traducciones comunes van en `shared/`:
+1. Abre `public/i18n/es.json` o `public/i18n/en.json`
+2. Agrega tu mensaje en la sección correspondiente
+3. Guarda y listo
+
+### Ejemplo:
 
 ```json
-// public/i18n/shared/es.json
+// public/i18n/es.json
 {
-  "common": {
-    "save": "Guardar",
-    "cancel": "Cancelar"
+  "user-management": {
+    "title": "Gestión de Usuarios",
+    "new-field": "Mi nuevo campo" // ← Agregar aquí
   }
 }
 ```
 
-## Comandos
+## ⚠️ Carpetas DEPRECADAS
 
-- `npm run i18n:merge` - Combina todos los archivos de traducción
+Las carpetas `features/` y `shared/` **YA NO SE USAN**.
 
-## Ventajas
+Todos los mensajes fueron migrados a los archivos principales. Estas carpetas se mantienen temporalmente pero **NO las edites**.
 
-- ✅ **Organización**: Cada feature tiene sus propias traducciones
-- ✅ **Mantenimiento**: Fácil encontrar y editar traducciones específicas
-- ✅ **Colaboración**: Múltiples desarrolladores pueden trabajar en diferentes features
-- ✅ **Simplicidad**: No requiere cambios en el código de la app
-- ✅ **Compatibilidad**: Funciona con tu `language.service.ts` existente
+## Ventajas del sistema consolidado
 
-## Notas
-
-- Los archivos principales (`es.json`, `en.json`) se regeneran automáticamente
-- No edites directamente los archivos principales durante el desarrollo
-- Siempre trabaja en los archivos de features o shared
-- Ejecuta el merge antes de hacer commit 
+- ✅ **Traducción profesional**: Envía 2 archivos al traductor, recibe 2 archivos traducidos
+- ✅ **Búsqueda global**: Encuentra cualquier mensaje con Ctrl+F
+- ✅ **Sin duplicados**: Un mensaje, un lugar
+- ✅ **Performance**: Carga más rápida (1 archivo vs 10+ archivos)
+- ✅ **Diff claro**: Los cambios en git son fáciles de revisar
+- ✅ **Compatible**: Funciona con `language.service.ts` sin cambios

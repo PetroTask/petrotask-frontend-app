@@ -55,6 +55,23 @@
     "maintain": "To maintenance",
     "able": "Available"
   },
+  "equipment": {
+    "form": {
+      "name": "Name",
+      "code": "Code",
+      "plate": "License Plate",
+      "capacityLoad": "Load Capacity (kg)",
+      "capacityPax": "Passenger Capacity",
+      "status": "Status",
+      "placeholders": {
+        "name": "Enter equipment name",
+        "code": "Enter code",
+        "plate": "Enter license plate",
+        "capacityLoad": "Enter load capacity",
+        "capacityPax": "Enter passenger capacity"
+      }
+    }
+  },
   "equipment-form-dialog": {
     "plate": "License plate",
     "model": "Model/Type",
@@ -90,7 +107,11 @@
     "all": "All roles",
     "search": "Search by name or email",
     "name": "Name",
+    "email": "Email",
+    "role": "Role",
     "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
     "actions": "Actions",
     "page": "Page",
     "of": "of",
@@ -655,7 +676,13 @@
     "operator.description": "Basic logistics operations"
   },
   "SHARED": {
-    "ACTIONS": "Actions",
+    "ACTIONS": {
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "REFRESH": "Refresh",
+      "ACTIVATE": "Activate",
+      "DEACTIVATE": "Deactivate"
+    },
     "ADD": "Add",
     "EDIT": "Edit",
     "DELETE": "Delete",
@@ -689,7 +716,19 @@
     "SUBTITLE": "Manage zones and locations for efficient resource organization",
     "ADD_ZONE": "Add Zone",
     "ADD_LOCATION": "Add Location",
+    "ADD_FIRST_LOCATION": "Add First Location",
     "SEARCH_PLACEHOLDER": "Search zones and locations...",
+    "SEARCH_ZONES_LOCATIONS": "Search zones and locations...",
+    "FILTER_STATUS": "Filter by Status",
+    "TENANT": "Tenant",
+    "TOTAL_LOCATIONS": "Total Locations",
+    "ACTIVE_LOCATIONS": "Active Locations",
+    "NO_ZONES": "No zones available",
+    "NO_ZONES_DESCRIPTION": "Start by creating zones to organize your locations",
+    "ADD_FIRST_ZONE": "Add First Zone",
+    "NO_LOCATIONS_IN_ZONE": "No locations in this zone",
+    "LOCATIONS_IN_ZONE": "Locations in Zone",
+    "LOADING": "Loading locations...",
     "EMPTY_STATE": {
       "TITLE": "No zones available",
       "DESCRIPTION": "Start by creating zones to organize your locations",
@@ -765,7 +804,13 @@
     "TITLE": "Equipment Management",
     "SUBTITLE": "Monitor and manage your equipment fleet efficiently",
     "ADD_EQUIPMENT": "Add Equipment",
+    "ADD_FIRST_EQUIPMENT": "Add First Equipment",
     "SEARCH_PLACEHOLDER": "Search equipment by name, model or serial...",
+    "FILTER_STATUS": "Filter by Status",
+    "TABLE_VIEW": "Table View",
+    "CARDS_VIEW": "Cards View",
+    "NO_EQUIPMENT": "No equipment available",
+    "NO_EQUIPMENT_DESCRIPTION": "Start by adding equipment to manage your fleet",
     "FILTERS": {
       "ALL_TYPES": "All Types",
       "ALL_STATUS": "All Status"
