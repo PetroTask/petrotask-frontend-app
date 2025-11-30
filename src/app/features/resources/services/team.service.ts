@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Team } from '../models/team.entity';
-import { TeamMember } from '../models/team-member.entity';
-import { TeamResource, CreateTeamResource, TeamMemberResource, CreateTeamMemberResource } from '../models/team.resource';
-import { TeamAssembler } from '../mappers/team.assembler';
-import { TeamMemberAssembler } from '../mappers/team-member.assembler';
 import { environment } from '../../../../environments/environment';
+import { TeamMemberAssembler } from '../mappers/team-member.assembler';
+import { TeamAssembler } from '../mappers/team.assembler';
+import { TeamMember } from '../models/team-member.entity';
+import { Team } from '../models/team.entity';
+import { TeamMemberResource, TeamResource } from '../models/team.resource';
 
 @Injectable({
   providedIn: 'root'

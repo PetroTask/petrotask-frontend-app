@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError } from 'rxjs';
 import { TaskProgramming } from '../model/task-programming.entity';
-import { TaskProgrammingResource, CreateTaskProgrammingResource, UpdateTaskProgrammingStatusResource, UpdateTaskProgrammingTimeIntervalResource } from '../model/task-programming.resource';
+import { TaskProgrammingResource, UpdateTaskProgrammingStatusResource, UpdateTaskProgrammingTimeIntervalResource } from '../model/task-programming.resource';
 import { TaskProgrammingAssembler } from '../mappers/task-programming.assembler';
 import { environment } from '../../../../environments/environment';
 import { of } from 'rxjs';

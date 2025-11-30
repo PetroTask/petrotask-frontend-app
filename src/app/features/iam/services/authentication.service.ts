@@ -1,46 +1,50 @@
-import {inject, Injectable} from '@angular/core';
-import {environment} from "../../../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {SignUpRequest} from "../models/sign-up.request";
-import {SignUpResponse} from "../models/sign-up.response";
-import {SignInRequest} from "../models/sign-in.request";
-import {SignInResponse} from "../models/sign-in.response";
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { FakeApiService } from 'src/app/core/services/fake-api.service';
-import { Roles } from '../models/roles.enum';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { List } from 'lodash';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { environment } from '../../../../environments/environment';
+import { Roles } from '../models/roles.enum';
+import { SignInRequest } from '../models/sign-in.request';
+import { SignInResponse } from '../models/sign-in.response';
+import { SignUpRequest } from '../models/sign-up.request';
+import { SignUpResponse } from '../models/sign-up.response';
 
 /**
  * Service for handling authentication operations.
  * @summary
  * This service is responsible for handling authentication operations like sign-up, sign-in, and sign-out.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-
   router = inject(Router);
   http = inject(HttpClient);
   localStorageService = inject(LocalStorageService);
-  fakeApiService = inject(FakeApiService);
 
   basePath: string = `${environment.apiBaseUrl}`;
-  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
-  private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private signedInUsername: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private signedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  private signedInUserId: BehaviorSubject<number> = new BehaviorSubject<number>(
+    0
+  );
+  private signedInUsername: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
   private roles: BehaviorSubject<Roles[]> = new BehaviorSubject<Roles[]>([]);
 
-
   constructor() {
-    if(this.localStorageService.hasKey('userSession')){
-        const userSession : SignInResponse= this.localStorageService.getItem('userSession');
-        this.signedIn.next(true);
-        this.signedInUserId.next(userSession.id);
-        this.signedInUsername.next(userSession.username);
-        this.roles.next(userSession.roles as Roles[]);
+    if (this.localStorageService.hasKey('userSession')) {
+      const userSession: SignInResponse =
+        this.localStorageService.getItem('userSession');
+      this.signedIn.next(true);
+      this.signedInUserId.next(userSession.id);
+      this.signedInUsername.next(userSession.username);
+      this.roles.next(userSession.roles as Roles[]);
     }
   }
 
@@ -56,7 +60,7 @@ export class AuthenticationService {
     return this.signedInUsername.asObservable();
   }
 
-  get currentRoles(){
+  get currentRoles() {
     return this.roles.asObservable();
   }
 
@@ -68,10 +72,11 @@ export class AuthenticationService {
    * @returns Observable of {@link SignUpResponse} object containing the user's id and username.
    */
   signUp(signUpRequest: SignUpRequest): Observable<SignUpResponse> {
-    if (environment.useFakeApi) {
-      return this.fakeApiService.signUp(signUpRequest);
-    }
-    return this.http.post<SignUpResponse>(`${this.basePath}/authentication/sign-up`, signUpRequest, this.httpOptions);
+    return this.http.post<SignUpResponse>(
+      `${this.basePath}/authentication/sign-up`,
+      signUpRequest,
+      this.httpOptions
+    );
   }
 
   /**
@@ -83,10 +88,11 @@ export class AuthenticationService {
    */
   signIn(signInRequest: SignInRequest): Observable<SignInResponse> {
     console.log('Signing in with:', signInRequest);
-    if (environment.useFakeApi) {
-      return this.fakeApiService.signIn(signInRequest);
-    }
-    return this.http.post<SignInResponse>(`${this.basePath}/authentication/sign-in`, signInRequest, this.httpOptions);
+    return this.http.post<SignInResponse>(
+      `${this.basePath}/authentication/sign-in`,
+      signInRequest,
+      this.httpOptions
+    );
   }
 
   /**
@@ -99,13 +105,14 @@ export class AuthenticationService {
     this.signedIn.next(true);
     this.signedInUserId.next(response.id);
     this.signedInUsername.next(response.username);
-    this.roles.next(response.roles as Roles[])
+    this.roles.next(response.roles as Roles[]);
     this.localStorageService.setItem('token', response.token);
     this.localStorageService.setItem('userSession', response);
     this.localStorageService.removeItem('menuItems');
-    console.log(`Signed in as ${response.username} with token ${response.token}`);
-    console.log('User roles:', response.roles);
-    this.router.navigate(['/petrotask/home']).then();
+    console.log(
+      `Signed in as ${response.username} with token ${response.token}`
+    );
+    this.router.navigate(['/swiftport/home']).then();
   }
 
   /**
@@ -116,21 +123,7 @@ export class AuthenticationService {
    */
   handleSuccessfulSignUp(response: SignUpResponse): void {
     console.log(`Signed up as ${response.username} with id ${response.id}`);
-    console.log('SignUp response roles:', response.roles);
-
-    // Simular login automático después del registro
-    this.signedIn.next(true);
-    this.signedInUserId.next(response.id);
-    this.signedInUsername.next(response.username);
-    this.roles.next(response.roles as Roles[]);
-    this.localStorageService.setItem('token', this.generateFakeToken(response));
-    this.localStorageService.setItem('userSession', response);
-    this.localStorageService.removeItem('menuItems');
-
-    // Navegar según el rol seleccionado
-    const role = (response as any).role || 'supervisor';
-    // Después del registro, llevar siempre al home
-    this.router.navigate(['/petrotask/home']).then();
+    this.router.navigate(['/login']).then();
   }
 
   /**
@@ -161,9 +154,4 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     this.router.navigate(['/login']).then();
   }
-
-  private generateFakeToken(user: any): string {
-    return `fake-token-${user.id}-${Date.now()}`;
-  }
-
 }
