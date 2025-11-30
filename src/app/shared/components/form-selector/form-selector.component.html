@@ -1,18 +1,18 @@
 <div [class]="getCssClasses()">
-  <label *ngIf="label" class="form-selector__label">
-    {{ label }}
+  <label *ngIf="label || labelTranslateKey" class="form-selector__label">
+    {{ labelTranslateKey ? (labelTranslateKey | translate) : label }}
     <span *ngIf="required" class="form-selector__required">*</span>
   </label>
-  
+
   <!-- Selección múltiple con chips -->
   <div *ngIf="multiple" class="form-selector__multiple-container">
     <div class="form-selector__selected-chips">
-      <div 
-        *ngFor="let selectedValue of getSelectedOptions()" 
+      <div
+        *ngFor="let selectedValue of getSelectedOptions()"
         class="form-selector__chip"
       >
         <span class="form-selector__chip-text">{{ selectedValue.label }}</span>
-        <button 
+        <button
           type="button"
           class="form-selector__chip-remove"
           (click)="removeSelection(selectedValue.value)"
@@ -21,16 +21,25 @@
           ×
         </button>
       </div>
-      
-      <div class="form-selector__chip form-selector__chip--add" *ngIf="!disabled">
+
+      <div
+        class="form-selector__chip form-selector__chip--add"
+        *ngIf="!disabled"
+      >
         <select
           class="form-selector__hidden-select"
           (change)="addSelection($event)"
           [disabled]="disabled"
         >
-          <option value="">{{ placeholder || 'Seleccionar...' }}</option>
-          <option 
-            *ngFor="let option of getAvailableOptions()" 
+          <option value="">
+            {{
+              placeholderTranslateKey
+                ? (placeholderTranslateKey | translate)
+                : placeholder || "Seleccionar..."
+            }}
+          </option>
+          <option
+            *ngFor="let option of getAvailableOptions()"
             [value]="option.value"
             [disabled]="option.disabled"
           >
@@ -52,11 +61,15 @@
       (blur)="onBlur()"
       (focus)="onFocus()"
     >
-      <option *ngIf="placeholder" value="" disabled>
-        {{ placeholder }}
+      <option *ngIf="placeholder || placeholderTranslateKey" value="" disabled>
+        {{
+          placeholderTranslateKey
+            ? (placeholderTranslateKey | translate)
+            : placeholder
+        }}
       </option>
-      <option 
-        *ngFor="let option of options" 
+      <option
+        *ngFor="let option of options"
         [value]="option.value"
         [disabled]="option.disabled"
       >

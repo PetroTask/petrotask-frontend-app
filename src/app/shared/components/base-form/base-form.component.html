@@ -1,14 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" [class]="getFormCssClasses()">
   <div class="base-form__fields">
     <ng-container *ngFor="let field of config.fields">
-      <div *ngIf="shouldShowField(field)" class="base-form__field" [attr.data-field-type]="field.type">
-        
+      <div
+        *ngIf="shouldShowField(field)"
+        class="base-form__field"
+        [attr.data-field-type]="field.type"
+      >
         <!-- Form Input -->
-        <app-form-input 
-          *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
+        <app-form-input
+          *ngIf="
+            field.type === 'text' ||
+            field.type === 'email' ||
+            field.type === 'password' ||
+            field.type === 'number'
+          "
           [formControlName]="field.key"
-          [label]="getFieldLabel(field)"
-          [placeholder]="getFieldPlaceholder(field)"
+          [label]="field.label || ''"
+          [labelTranslateKey]="field.labelKey || ''"
+          [placeholder]="field.placeholder || ''"
+          [placeholderTranslateKey]="field.placeholderKey || ''"
           [type]="field.type"
           [required]="field.required || false"
           [disabled]="field.disabled || false"
@@ -21,11 +31,13 @@
         ></app-form-input>
 
         <!-- Form Selector -->
-        <app-form-selector 
+        <app-form-selector
           *ngIf="field.type === 'select'"
           [formControlName]="field.key"
-          [label]="getFieldLabel(field)"
-          [placeholder]="getFieldPlaceholder(field)"
+          [label]="field.label || ''"
+          [labelTranslateKey]="field.labelKey || ''"
+          [placeholder]="field.placeholder || ''"
+          [placeholderTranslateKey]="field.placeholderKey || ''"
           [required]="field.required || false"
           [disabled]="field.disabled || false"
           [options]="field.options || []"
@@ -38,7 +50,10 @@
         ></app-form-selector>
 
         <!-- Textarea -->
-        <div *ngIf="field.type === 'textarea'" class="base-form__textarea-field">
+        <div
+          *ngIf="field.type === 'textarea'"
+          class="base-form__textarea-field"
+        >
           <label class="base-form__label">
             {{ getFieldLabel(field) }}
             <span *ngIf="field.required" class="base-form__required">*</span>
@@ -55,17 +70,21 @@
           <div *ngIf="hasFieldError(field)" class="base-form__error">
             {{ getFieldErrorMessage(field) }}
           </div>
-          <div *ngIf="getFieldHelpText(field) && !hasFieldError(field)" class="base-form__help">
+          <div
+            *ngIf="getFieldHelpText(field) && !hasFieldError(field)"
+            class="base-form__help"
+          >
             {{ getFieldHelpText(field) }}
           </div>
         </div>
 
         <!-- Campo Personalizado -->
-        <div *ngIf="field.type === 'custom'" 
-             class="base-form__custom-field"
-             [ngClass]="field.customClass"
-             [style.height]="field.customHeight">
-          
+        <div
+          *ngIf="field.type === 'custom'"
+          class="base-form__custom-field"
+          [ngClass]="field.customClass"
+          [style.height]="field.customHeight"
+        >
           <label *ngIf="field.label" class="base-form__label">
             {{ getFieldLabel(field) }}
             <span *ngIf="field.required" class="base-form__required">*</span>
@@ -73,17 +92,23 @@
 
           <!-- Content Projection - aquí se puede insertar cualquier contenido -->
           <div class="base-form__custom-content">
-            <ng-container 
-              *ngTemplateOutlet="customTemplate || null; context: getCustomFieldContext(field)"
+            <ng-container
+              *ngTemplateOutlet="
+                customTemplate || null;
+                context: getCustomFieldContext(field)
+              "
             ></ng-container>
-            
+
             <!-- Fallback si no hay template personalizado -->
             <div *ngIf="!customTemplate" class="base-form__custom-placeholder">
               <div class="custom-field-placeholder">
                 <div class="placeholder-icon">🗺️</div>
                 <div class="placeholder-text">
                   <h4>Campo Personalizado: {{ field.key }}</h4>
-                  <p>Usa &lt;ng-template #customTemplate&gt; para personalizar este contenido</p>
+                  <p>
+                    Usa &lt;ng-template #customTemplate&gt; para personalizar
+                    este contenido
+                  </p>
                 </div>
               </div>
             </div>
@@ -93,11 +118,13 @@
             {{ getFieldErrorMessage(field) }}
           </div>
 
-          <div *ngIf="getFieldHelpText(field) && !hasFieldError(field)" class="base-form__help">
+          <div
+            *ngIf="getFieldHelpText(field) && !hasFieldError(field)"
+            class="base-form__help"
+          >
             {{ getFieldHelpText(field) }}
           </div>
         </div>
-
       </div>
     </ng-container>
   </div>
@@ -110,7 +137,7 @@
       [class.base-form__submit-button--loading]="isSubmitting"
     >
       <span *ngIf="!isSubmitting">{{ getSubmitButtonText() }}</span>
-      <span *ngIf="isSubmitting">{{ 'common.loading' | translate }}</span>
+      <span *ngIf="isSubmitting">{{ "common.loading" | translate }}</span>
     </button>
 
     <button

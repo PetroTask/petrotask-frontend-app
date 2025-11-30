@@ -1,14 +1,18 @@
 <div [class]="getCssClasses()">
-  <label *ngIf="label" class="form-input__label">
-    {{ label }}
+  <label *ngIf="label || labelTranslateKey" class="form-input__label">
+    {{ labelTranslateKey ? (labelTranslateKey | translate) : label }}
     <span *ngIf="required" class="form-input__required">*</span>
   </label>
-  
+
   <div class="form-input__field">
     <input
       [type]="type"
       [value]="value"
-      [placeholder]="placeholder"
+      [attr.placeholder]="
+        placeholderTranslateKey
+          ? (placeholderTranslateKey | translate)
+          : placeholder
+      "
       [disabled]="disabled"
       [readonly]="readonly"
       class="form-input__input"

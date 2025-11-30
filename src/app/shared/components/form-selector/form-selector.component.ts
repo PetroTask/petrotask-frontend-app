@@ -1,6 +1,17 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface SelectOption {
   value: any;
@@ -11,20 +22,22 @@ export interface SelectOption {
 @Component({
   selector: 'app-form-selector',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './form-selector.component.html',
   styleUrl: './form-selector.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FormSelectorComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class FormSelectorComponent implements ControlValueAccessor {
   @Input() label: string = '';
+  @Input() labelTranslateKey: string = '';
   @Input() placeholder: string = '';
+  @Input() placeholderTranslateKey: string = '';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() options: SelectOption[] = [];
@@ -72,16 +85,16 @@ export class FormSelectorComponent implements ControlValueAccessor {
 
   onSelectionChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const value = this.multiple ? 
-      Array.from(target.selectedOptions).map(option => option.value) : 
-      target.value;
+    const value = this.multiple
+      ? Array.from(target.selectedOptions).map((option) => option.value)
+      : target.value;
     this.value = value;
   }
 
   addSelection(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const selectedValue = target.value;
-    
+
     if (selectedValue && this.multiple) {
       const currentValues = Array.isArray(this.value) ? this.value : [];
       if (!currentValues.includes(selectedValue)) {
@@ -94,7 +107,7 @@ export class FormSelectorComponent implements ControlValueAccessor {
 
   removeSelection(valueToRemove: any): void {
     if (this.multiple && Array.isArray(this.value)) {
-      this.value = this.value.filter(v => v !== valueToRemove);
+      this.value = this.value.filter((v) => v !== valueToRemove);
     }
   }
 
@@ -102,9 +115,9 @@ export class FormSelectorComponent implements ControlValueAccessor {
     if (!this.multiple || !Array.isArray(this.value)) {
       return [];
     }
-    
-    return this.value.map(val => {
-      const option = this.options.find(opt => opt.value === val);
+
+    return this.value.map((val) => {
+      const option = this.options.find((opt) => opt.value === val);
       return option || { value: val, label: val.toString() };
     });
   }
@@ -113,9 +126,11 @@ export class FormSelectorComponent implements ControlValueAccessor {
     if (!this.multiple) {
       return this.options;
     }
-    
+
     const selectedValues = Array.isArray(this.value) ? this.value : [];
-    return this.options.filter(option => !selectedValues.includes(option.value));
+    return this.options.filter(
+      (option) => !selectedValues.includes(option.value)
+    );
   }
 
   onBlur(): void {
@@ -131,7 +146,7 @@ export class FormSelectorComponent implements ControlValueAccessor {
     const classes = [
       'form-selector',
       `form-selector--${this.size}`,
-      `form-selector--${this.variant}`
+      `form-selector--${this.variant}`,
     ];
 
     if (this.hasError) {

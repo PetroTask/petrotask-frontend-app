@@ -9,31 +9,38 @@
   </label>
 
   <!-- Selector Container -->
-  <div class="selector-container" (click)="onSelectorClick()" (blur)="onBlur()" tabindex="0">
+  <div
+    class="selector-container"
+    (click)="onSelectorClick()"
+    (blur)="onBlur()"
+    tabindex="0"
+  >
     <!-- Leading Icon -->
     <mat-icon *ngIf="icon" class="selector-icon leading">{{ icon }}</mat-icon>
-    
+
     <!-- Display Value -->
     <div class="selector-display">
-      <span *ngIf="placeholderTranslateKey && displayValue === getPlaceholderText(); else displayText" 
-            class="placeholder">
-        {{ placeholderTranslateKey | translate }}
+      <span *ngIf="shouldShowPlaceholder; else displayText" class="placeholder">
+        {{
+          placeholderTranslateKey
+            ? (placeholderTranslateKey | translate)
+            : placeholderText
+        }}
       </span>
       <ng-template #displayText>
-        <span [class.placeholder]="displayValue === getPlaceholderText()">
-          {{ displayValue }}
-        </span>
+        <span>{{ displayValue }}</span>
       </ng-template>
     </div>
 
     <!-- Trailing Icons -->
     <div class="selector-actions">
       <!-- Clear Button -->
-      <button 
-        *ngIf="clearable && selectedOption && !disabled" 
+      <button
+        *ngIf="clearable && selectedOption && !disabled"
         type="button"
         class="clear-button"
-        (click)="onClear(); $event.stopPropagation()">
+        (click)="onClear(); $event.stopPropagation()"
+      >
         <mat-icon>clear</mat-icon>
       </button>
 
@@ -43,7 +50,11 @@
       </div>
 
       <!-- Dropdown Arrow -->
-      <mat-icon *ngIf="!loading" class="dropdown-arrow" [class.rotated]="isOpen">
+      <mat-icon
+        *ngIf="!loading"
+        class="dropdown-arrow"
+        [class.rotated]="isOpen"
+      >
         expand_more
       </mat-icon>
     </div>
@@ -54,27 +65,30 @@
     <!-- Search Input -->
     <div *ngIf="searchable" class="search-container">
       <mat-icon class="search-icon">search</mat-icon>
-      <input 
+      <input
         type="text"
         class="search-input"
         [placeholder]="'Search...' | translate"
         [value]="searchTerm"
         (input)="onSearchInput($event)"
-        (click)="$event.stopPropagation()">
+        (click)="$event.stopPropagation()"
+      />
     </div>
 
     <!-- Options List -->
     <div class="options-list">
-      <div 
+      <div
         *ngFor="let option of filteredOptions; trackBy: trackByValue"
         class="option"
         [class.selected]="isSelected(option)"
         [class.disabled]="option.disabled"
-        (click)="onOptionClick(option)">
-        
+        (click)="onOptionClick(option)"
+      >
         <!-- Option Icon -->
-        <mat-icon *ngIf="option.icon" class="option-icon">{{ option.icon }}</mat-icon>
-        
+        <mat-icon *ngIf="option.icon" class="option-icon">{{
+          option.icon
+        }}</mat-icon>
+
         <!-- Option Label -->
         <span class="option-label">
           <span *ngIf="option.translateKey; else optionText">
@@ -85,16 +99,19 @@
 
         <!-- Selection Indicator -->
         <mat-icon *ngIf="isSelected(option)" class="selection-indicator">
-          {{ multiple ? 'check_box' : 'check' }}
+          {{ multiple ? "check_box" : "check" }}
         </mat-icon>
-        <mat-icon *ngIf="multiple && !isSelected(option)" class="selection-indicator">
+        <mat-icon
+          *ngIf="multiple && !isSelected(option)"
+          class="selection-indicator"
+        >
           check_box_outline_blank
         </mat-icon>
       </div>
 
       <!-- No Options Message -->
       <div *ngIf="filteredOptions.length === 0" class="no-options">
-        <span>{{ 'No options found' | translate }}</span>
+        <span>{{ "No options found" | translate }}</span>
       </div>
     </div>
   </div>
@@ -102,6 +119,8 @@
   <!-- Helper Text or Error Message -->
   <div *ngIf="helperText || errorMessage" class="selector-helper">
     <span *ngIf="errorMessage" class="error-text">{{ errorMessage }}</span>
-    <span *ngIf="helperText && !errorMessage" class="helper-text">{{ helperText }}</span>
+    <span *ngIf="helperText && !errorMessage" class="helper-text">{{
+      helperText
+    }}</span>
   </div>
 </div>

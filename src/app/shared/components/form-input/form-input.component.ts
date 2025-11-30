@@ -1,24 +1,37 @@
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FormInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class FormInputComponent implements ControlValueAccessor {
   @Input() label: string = '';
+  @Input() labelTranslateKey: string = '';
   @Input() placeholder: string = '';
+  @Input() placeholderTranslateKey: string = '';
   @Input() type: string = 'text';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
@@ -82,7 +95,7 @@ export class FormInputComponent implements ControlValueAccessor {
     const classes = [
       'form-input',
       `form-input--${this.size}`,
-      `form-input--${this.variant}`
+      `form-input--${this.variant}`,
     ];
 
     if (this.hasError) {

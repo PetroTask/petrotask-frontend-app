@@ -1,6 +1,16 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -10,11 +20,13 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, FormsModule, MatIconModule, TranslateModule],
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => InputComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputComponent),
+      multi: true,
+    },
+  ],
 })
 export class InputComponent implements ControlValueAccessor {
   // Basic properties
@@ -33,7 +45,13 @@ export class InputComponent implements ControlValueAccessor {
   @Input() autocomplete?: string;
 
   // Design properties
-  @Input() color: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'neutral' = 'primary';
+  @Input() color:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'neutral' = 'primary';
   @Input() variant: 'solid' | 'outline' | 'ghost' = 'outline';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() fullWidth: boolean = false;
@@ -70,7 +88,7 @@ export class InputComponent implements ControlValueAccessor {
       'input',
       `color-${this.color}`,
       `variant-${this.variant}`,
-      `size-${this.size}`
+      `size-${this.size}`,
     ];
 
     if (this.disabled) classes.push('disabled');
@@ -87,15 +105,8 @@ export class InputComponent implements ControlValueAccessor {
     return classes.join(' ');
   }
 
-  get displayPlaceholder(): string {
-    if (this.placeholderTranslateKey) {
-      return this.placeholderTranslateKey;
-    }
-    return this.placeholder || '';
-  }
-
   get showClearButton(): boolean {
-    return (this.clearable && !!this.value && !this.disabled && !this.readonly);
+    return this.clearable && !!this.value && !this.disabled && !this.readonly;
   }
 
   get inputType(): string {

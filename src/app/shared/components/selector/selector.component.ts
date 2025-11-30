@@ -1,6 +1,16 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -14,28 +24,29 @@ export interface SelectorOption {
 
 @Component({
   selector: 'app-selector',
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatIconModule,
-    TranslateModule
-  ],
+  imports: [CommonModule, FormsModule, MatIconModule, TranslateModule],
   templateUrl: './selector.component.html',
   styleUrl: './selector.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SelectorComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class SelectorComponent implements ControlValueAccessor {
   // Input options - can be simple strings or complex objects
   @Input() options: (string | SelectorOption)[] = [];
   @Input() placeholder?: string;
   @Input() placeholderTranslateKey?: string;
-  @Input() color: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'neutral' = 'primary';
+  @Input() color:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'neutral' = 'primary';
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() variant: 'solid' | 'outline' | 'ghost' = 'outline';
   @Input() disabled = false;
@@ -66,7 +77,7 @@ export class SelectorComponent implements ControlValueAccessor {
       'selector',
       `color-${this.color}`,
       `size-${this.size}`,
-      `variant-${this.variant}`
+      `variant-${this.variant}`,
     ];
 
     if (this.disabled) classes.push('disabled');
@@ -80,7 +91,7 @@ export class SelectorComponent implements ControlValueAccessor {
   }
 
   get normalizedOptions(): SelectorOption[] {
-    return this.options.map(option => {
+    return this.options.map((option) => {
       if (typeof option === 'string') {
         return { value: option, label: option };
       }
@@ -92,10 +103,11 @@ export class SelectorComponent implements ControlValueAccessor {
     if (!this.searchTerm) {
       return this.normalizedOptions;
     }
-    
-    return this.normalizedOptions.filter(option => 
-      option.label.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      option.value.toLowerCase().includes(this.searchTerm.toLowerCase())
+
+    return this.normalizedOptions.filter(
+      (option) =>
+        option.label.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        option.value.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
@@ -105,25 +117,37 @@ export class SelectorComponent implements ControlValueAccessor {
         return this.getPlaceholderText();
       }
       if (this.selectedOption.length === 1) {
-        const option = this.normalizedOptions.find(opt => opt.value === this.selectedOption[0]);
+        const option = this.normalizedOptions.find(
+          (opt) => opt.value === this.selectedOption[0]
+        );
         return this.getOptionLabel(option);
       }
       return `${this.selectedOption.length} selected`;
     }
-    
+
     if (this.selectedOption) {
-      const option = this.normalizedOptions.find(opt => opt.value === this.selectedOption);
+      const option = this.normalizedOptions.find(
+        (opt) => opt.value === this.selectedOption
+      );
       return this.getOptionLabel(option);
     }
-    
+
     return this.getPlaceholderText();
   }
 
   getPlaceholderText(): string {
-    if (this.placeholderTranslateKey) {
-      return this.placeholderTranslateKey;
-    }
     return this.placeholder || 'Select option';
+  }
+
+  get placeholderText(): string {
+    return this.placeholder || 'Select option';
+  }
+
+  get shouldShowPlaceholder(): boolean {
+    if (this.multiple && Array.isArray(this.selectedOption)) {
+      return this.selectedOption.length === 0;
+    }
+    return !this.selectedOption;
   }
 
   getOptionLabel(option?: SelectorOption): string {
@@ -159,15 +183,17 @@ export class SelectorComponent implements ControlValueAccessor {
     if (option.disabled) return;
 
     if (this.multiple) {
-      const currentSelected = Array.isArray(this.selectedOption) ? this.selectedOption : [];
+      const currentSelected = Array.isArray(this.selectedOption)
+        ? this.selectedOption
+        : [];
       const index = currentSelected.indexOf(option.value);
-      
+
       if (index > -1) {
         currentSelected.splice(index, 1);
       } else {
         currentSelected.push(option.value);
       }
-      
+
       this.selectedOption = [...currentSelected];
     } else {
       this.selectedOption = option.value;
