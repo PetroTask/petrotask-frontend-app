@@ -72,6 +72,48 @@
       }
     }
   },
+  "team": {
+    "form": {
+      "name": "Nombre del equipo",
+      "placeholders": {
+        "name": "Ingrese el nombre del equipo"
+      }
+    }
+  },
+  "location": {
+    "form": {
+      "street": "Calle",
+      "city": "Ciudad",
+      "country": "País",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "status": "Estado",
+      "placeholders": {
+        "street": "Ingrese la calle",
+        "city": "Ingrese la ciudad",
+        "country": "Ingrese el país",
+        "latitude": "Ingrese la latitud",
+        "longitude": "Ingrese la longitud"
+      }
+    }
+  },
+  "employee": {
+    "form": {
+      "name": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "phoneNumber": "Número de teléfono",
+      "position": "Cargo",
+      "status": "Estado",
+      "placeholders": {
+        "name": "Ingrese el nombre",
+        "lastName": "Ingrese el apellido",
+        "email": "Ingrese el correo electrónico",
+        "phoneNumber": "Ingrese el número de teléfono",
+        "position": "Ingrese el cargo"
+      }
+    }
+  },
   "equipment-form-dialog": {
     "plate": "Placa",
     "model": "Modelo/Tipo",

@@ -72,6 +72,48 @@
       }
     }
   },
+  "team": {
+    "form": {
+      "name": "Team Name",
+      "placeholders": {
+        "name": "Enter team name"
+      }
+    }
+  },
+  "location": {
+    "form": {
+      "street": "Street",
+      "city": "City",
+      "country": "Country",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "status": "Status",
+      "placeholders": {
+        "street": "Enter street",
+        "city": "Enter city",
+        "country": "Enter country",
+        "latitude": "Enter latitude",
+        "longitude": "Enter longitude"
+      }
+    }
+  },
+  "employee": {
+    "form": {
+      "name": "Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "position": "Position",
+      "status": "Status",
+      "placeholders": {
+        "name": "Enter name",
+        "lastName": "Enter last name",
+        "email": "Enter email",
+        "phoneNumber": "Enter phone number",
+        "position": "Enter position"
+      }
+    }
+  },
   "equipment-form-dialog": {
     "plate": "License plate",
     "model": "Model/Type",
