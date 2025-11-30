@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { PositionAssembler } from '../mappers/position.assembler';
 import { Position } from '../models/position.entity';
@@ -26,8 +26,7 @@ export class PositionService {
       ),
       catchError((error) => {
         console.error('Error in getAllPositions:', error);
-        // Return mock positions for development
-        return of(this.getMockPositions());
+        return throwError(() => error);
       })
     );
   }
@@ -37,10 +36,7 @@ export class PositionService {
       map((resource) => PositionAssembler.toEntityFromResource(resource)),
       catchError((error) => {
         console.error(`Error getting position ${id}:`, error);
-        const mockPositions = this.getMockPositions();
-        const mockPosition =
-          mockPositions.find((p) => p.id === id) || mockPositions[0];
-        return of(mockPosition);
+        return throwError(() => error);
       })
     );
   }
@@ -51,81 +47,8 @@ export class PositionService {
       map((resource) => PositionAssembler.toEntityFromResource(resource)),
       catchError((error) => {
         console.error('Error creating position:', error);
-        // For development, simulate creation
-        const newPosition = new Position(
-          Date.now(),
-          position.tenantId,
-          position.title,
-          position.description
-        );
-        return of(newPosition);
+        return throwError(() => error);
       })
     );
-  }
-
-  // Mock data for development
-  private getMockPositions(): Position[] {
-    return [
-      new Position(
-        1,
-        1,
-        'Gerente General',
-        'Responsable de la dirección estratégica y operativa de la empresa'
-      ),
-      new Position(
-        2,
-        1,
-        'Supervisor de Operaciones',
-        'Supervisa las actividades operativas diarias y coordina equipos de trabajo'
-      ),
-      new Position(
-        3,
-        1,
-        'Operario de Producción',
-        'Ejecuta tareas de producción y mantenimiento de equipos'
-      ),
-      new Position(
-        4,
-        1,
-        'Técnico Especialista',
-        'Proporciona soporte técnico especializado y mantenimiento preventivo'
-      ),
-      new Position(
-        5,
-        1,
-        'Analista de Calidad',
-        'Realiza controles de calidad y análisis de procesos productivos'
-      ),
-      new Position(
-        6,
-        1,
-        'Asistente Administrativo',
-        'Brinda apoyo administrativo y gestiona documentación'
-      ),
-      new Position(
-        7,
-        1,
-        'Jefe de Logística',
-        'Coordina actividades de almacén, distribución y cadena de suministro'
-      ),
-      new Position(
-        8,
-        1,
-        'Director de Recursos Humanos',
-        'Lidera estrategias de talento humano y desarrollo organizacional'
-      ),
-      new Position(
-        9,
-        1,
-        'Coordinador de Seguridad',
-        'Implementa protocolos de seguridad y prevención de riesgos'
-      ),
-      new Position(
-        10,
-        1,
-        'Especialista en Mantenimiento',
-        'Realiza mantenimiento predictivo y correctivo de maquinaria'
-      ),
-    ];
   }
 }

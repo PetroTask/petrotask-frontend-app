@@ -112,7 +112,7 @@ export class AuthenticationService {
     console.log(
       `Signed in as ${response.username} with token ${response.token}`
     );
-    this.router.navigate(['/swiftport/home']).then();
+    this.router.navigate(['/petrotask/home']).then();
   }
 
   /**
